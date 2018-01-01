@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.infokin</groupId>
+    <artifactId>dilithium-exchange-manager</artifactId>
+    <version>0.1-SNAPSHOT</version>
+
+    <name>Dilithium Exchange Manager</name>
+    <description>
+        Dilithium Exchange Manager for Star Trek Online.
+    </description>
+    <inceptionYear>2017</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/mit</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>clovergaze</id>
+            <name>Johannes Hillert</name>
+            <email>johannes.hillert@infokin.org</email>
+            <roles>
+                <role>Original Author</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Infokin.org</name>
+        <url>http://www.infokin.org/</url>
+    </organization>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Java 8 -->
+        <version.java>1.8</version.java>
+
+        <!-- Dependencies -->
+        <version.commons-lang>3.7</version.commons-lang>
+        <version.hibernate>5.2.12.Final</version.hibernate>
+        <version.hsqldb>2.4.0</version.hsqldb>
+        <version.tornado>1.0.6</version.tornado>
+
+        <!-- Plugins -->
+        <version.plugin.compiler>3.7.0</version.plugin.compiler>
+        <version.plugin.javafx>8.8.3</version.plugin.javafx>
+    </properties>
+
+    <dependencies>
+        <!-- Apache Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version.commons-lang}</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${version.hibernate}</version>
+        </dependency>
+
+        <!-- HSQLDB -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${version.hsqldb}</version>
+        </dependency>
+
+        <!-- Tornado FX Controls -->
+        <dependency>
+            <groupId>no.tornado</groupId>
+            <artifactId>tornadofx-controls</artifactId>
+            <version>${version.tornado}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Apache Maven Compiler Plugin -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.plugin.compiler}</version>
+                <configuration>
+                    <source>${version.java}</source>
+                    <target>${version.java}</target>
+                </configuration>
+            </plugin>
+
+            <!-- JavaFX Maven Plugin -->
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${version.plugin.javafx}</version>
+                <configuration>
+                    <mainClass>org.infokin.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

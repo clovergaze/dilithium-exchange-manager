@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import tornadofx.control.DateTimePicker?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootNode" prefHeight="600" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="org.infokin.controller.MainViewController">
+    <top>
+        <MenuBar>
+            <Menu mnemonicParsing="false" text="File">
+                <MenuItem mnemonicParsing="false" onAction="#handleCloseApplication" text="Close"/>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+                <MenuItem mnemonicParsing="false" text="About"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <Tab text="Overview">
+                <AnchorPane/>
+            </Tab>
+            <Tab onSelectionChanged="#handlePurchaseTabSelection" text="Purchases">
+                <AnchorPane>
+                    <BorderPane prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <bottom>
+                            <VBox maxWidth="320.0" minWidth="320.0" spacing="16.0" BorderPane.alignment="CENTER">
+                                <VBox spacing="8.0">
+                                    <Label text="Date"/>
+                                    <DateTimePicker fx:id="purchaseDateTimePicker" prefWidth="320.0"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Price"/>
+                                    <TextField fx:id="purchasePrice" onKeyReleased="#handlePurchasePriceChanged"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Amount (ZEN)"/>
+                                    <TextField fx:id="purchaseAmountZen" onKeyReleased="#handlePurchaseAmountChanged"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Amount (Dilithium)"/>
+                                    <TextField fx:id="purchaseAmountDilithium" editable="false"/>
+                                </VBox>
+                                <HBox spacing="8.0">
+                                    <Button mnemonicParsing="false" onAction="#handleResetPurchaseButtonClick"
+                                            prefWidth="160.0" text="Reset"/>
+                                    <Button fx:id="addPurchaseButton" disable="true" mnemonicParsing="false"
+                                            onAction="#handleAddPurchaseButtonClick" prefWidth="160.0"
+                                            text="Add Purchase"/>
+                                    <VBox.margin>
+                                        <Insets top="8.0"/>
+                                    </VBox.margin>
+                                </HBox>
+                                <BorderPane.margin>
+                                    <Insets/>
+                                </BorderPane.margin>
+                            </VBox>
+                        </bottom>
+                        <padding>
+                            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+                        </padding>
+                        <top>
+                            <TableView fx:id="purchaseTable" prefHeight="200.0" BorderPane.alignment="CENTER">
+                                <columns>
+                                    <TableColumn fx:id="purchaseDateColumn" prefWidth="260.0" text="Date"/>
+                                    <TableColumn fx:id="purchasePriceColumn" prefWidth="100.0" text="Price"/>
+                                    <TableColumn prefWidth="287.0" text="Amount">
+                                        <columns>
+                                            <TableColumn fx:id="purchaseAmountZenColumn" prefWidth="120.0" text="ZEN"/>
+                                            <TableColumn fx:id="purchaseAmountDilithiumColumn" prefWidth="160.0"
+                                                         text="Dilithium"/>
+                                        </columns>
+                                    </TableColumn>
+                                </columns>
+                                <BorderPane.margin>
+                                    <Insets bottom="16.0"/>
+                                </BorderPane.margin>
+                            </TableView>
+                        </top>
+                    </BorderPane>
+                </AnchorPane>
+            </Tab>
+            <Tab onSelectionChanged="#handleSaleTabSelection" text="Sales">
+                <AnchorPane>
+                    <BorderPane prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <center>
+                            <TableView fx:id="saleTable" prefHeight="200.0" BorderPane.alignment="CENTER">
+                                <columns>
+                                    <TableColumn fx:id="saleDateColumn" prefWidth="260.0" text="Date"/>
+                                    <TableColumn fx:id="salePriceColumn" prefWidth="100.0" text="Price"/>
+                                    <TableColumn prefWidth="287.0" text="Amount">
+                                        <columns>
+                                            <TableColumn fx:id="saleAmountZenColumn" prefWidth="120.0" text="ZEN"/>
+                                            <TableColumn fx:id="saleAmountDilithiumColumn" prefWidth="160.0"
+                                                         text="Dilithium"/>
+                                        </columns>
+                                    </TableColumn>
+                                </columns>
+                                <BorderPane.margin>
+                                    <Insets bottom="16.0"/>
+                                </BorderPane.margin>
+                            </TableView>
+                        </center>
+                        <bottom>
+                            <VBox maxWidth="320.0" minWidth="320.0" spacing="16.0" BorderPane.alignment="CENTER">
+                                <VBox spacing="8.0">
+                                    <Label text="Date"/>
+                                    <DateTimePicker fx:id="saleDateTimePicker" prefWidth="320.0"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Price"/>
+                                    <TextField fx:id="salePrice" onKeyReleased="#handleSalePriceChanged"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Amount (ZEN)"/>
+                                    <TextField fx:id="saleAmountZen" onKeyReleased="#handleSaleAmountChanged"/>
+                                </VBox>
+                                <VBox spacing="8.0">
+                                    <Label text="Amount (Dilithium)"/>
+                                    <TextField fx:id="saleAmountDilithium"/>
+                                </VBox>
+                                <HBox spacing="8.0">
+                                    <Button mnemonicParsing="false" onAction="#handleResetSaleButtonClick"
+                                            prefWidth="160.0" text="Reset"/>
+                                    <Button fx:id="addSaleButton" disable="true" mnemonicParsing="false"
+                                            onAction="#handleAddSaleButtonClick" prefWidth="160.0" text="Add Sale"/>
+                                    <VBox.margin>
+                                        <Insets top="8.0"/>
+                                    </VBox.margin>
+                                </HBox>
+                                <BorderPane.margin>
+                                    <Insets/>
+                                </BorderPane.margin>
+                            </VBox>
+                        </bottom>
+                        <padding>
+                            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+                        </padding>
+                    </BorderPane>
+                </AnchorPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
