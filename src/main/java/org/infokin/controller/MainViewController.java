@@ -334,12 +334,15 @@ public class MainViewController extends Controller {
      */
     private Long calculateAverageBuyingPrice(List<Purchase> purchases) {
         Long result = 0L;
+        int count = purchases.size();
 
-        for (Purchase purchase : purchases) {
-            result += purchase.getPrice();
+        if (count > 0) {
+            for (Purchase purchase : purchases) {
+                result += purchase.getPrice();
+            }
+
+            result /= count;
         }
-
-        result /= purchases.size();
 
         return result;
     }
@@ -352,12 +355,15 @@ public class MainViewController extends Controller {
      */
     private Long calculateAverageSellingPrice(List<Sale> sales) {
         Long result = 0L;
+        int count = sales.size();
 
-        for (Sale sale : sales) {
-            result += sale.getPrice();
+        if (count > 0) {
+            for (Sale sale : sales) {
+                result += sale.getPrice();
+            }
+
+            result /= count;
         }
-
-        result /= sales.size();
 
         return result;
     }
