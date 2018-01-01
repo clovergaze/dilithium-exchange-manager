@@ -81,7 +81,7 @@
                         <padding>
                             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
                         </padding>
-                        <top>
+                        <center>
                             <TableView fx:id="purchaseTable" prefHeight="200.0" BorderPane.alignment="CENTER">
                                 <columns>
                                     <TableColumn fx:id="purchaseDateColumn" prefWidth="260.0" text="Date"/>
@@ -98,7 +98,7 @@
                                     <Insets bottom="16.0"/>
                                 </BorderPane.margin>
                             </TableView>
-                        </top>
+                        </center>
                     </BorderPane>
                 </AnchorPane>
             </Tab>
