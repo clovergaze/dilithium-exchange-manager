@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import org.infokin.controller.api.Controller;
@@ -20,6 +17,7 @@ import tornadofx.control.DateTimePicker;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Controller for main view.
@@ -35,6 +33,16 @@ public class MainViewController extends Controller {
      */
     @FXML
     private BorderPane rootNode;
+
+    //
+    // Overview tab
+    //
+
+    @FXML
+    private Label overviewZENBalance;
+
+    @FXML
+    private Label overviewDilithiumBalance;
 
     //
     // Purchase tab
@@ -153,6 +161,19 @@ public class MainViewController extends Controller {
     }
 
     //
+    // Overview tab
+    //
+
+    @FXML
+    private void handleOverviewTabSelection() {
+        Long zenBalance = calculateCurrentZenBalance();
+        Long dilithiumBalance = calculateCurrentDilithiumBalance();
+
+        overviewZENBalance.setText(zenBalance.toString() + " ZEN");
+        overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
+    }
+
+    //
     // Purchase tab
     //
 
@@ -241,6 +262,50 @@ public class MainViewController extends Controller {
     /*---------
     | Methods |
     ---------*/
+
+    /**
+     * Calculates the current ZEN balance.
+     *
+     * @return The current amount of ZEN.
+     */
+    private Long calculateCurrentZenBalance() {
+        List<Purchase> purchases = purchaseService.getAllPurchases();
+        List<Sale> sales = saleService.getAllSales();
+
+        Long result = 0L;
+
+        for (Purchase purchase : purchases) {
+            result += purchase.getAmountZen();
+        }
+
+        for (Sale sale : sales) {
+            result -= sale.getAmountZen();
+        }
+
+        return result;
+    }
+
+    /**
+     * Calculates the Dilithium balance.
+     *
+     * @return The current amount of Dilithium.
+     */
+    private Long calculateCurrentDilithiumBalance() {
+        List<Purchase> purchases = purchaseService.getAllPurchases();
+        List<Sale> sales = saleService.getAllSales();
+
+        Long result = 0L;
+
+        for (Purchase purchase : purchases) {
+            result += purchase.getAmountDilithium();
+        }
+
+        for (Sale sale : sales) {
+            result -= sale.getAmountDilithium();
+        }
+
+        return result;
+    }
 
     /**
      * Sets current date and time to specified {@link DateTimePicker}.
