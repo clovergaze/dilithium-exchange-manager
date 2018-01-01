@@ -44,6 +44,15 @@ public class MainViewController extends Controller {
     @FXML
     private Label overviewDilithiumBalance;
 
+    @FXML
+    private Label overviewAverageBuyingPrice;
+
+    @FXML
+    private Label overviewAverageSellingPrice;
+
+    @FXML
+    private Label overviewAveragePrice;
+
     //
     // Purchase tab
     //
@@ -174,6 +183,15 @@ public class MainViewController extends Controller {
 
         overviewZENBalance.setText(zenBalance.toString() + " ZEN");
         overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
+
+        Long averageBuyingPrice = calculateAverageBuyingPrice(purchases);
+        Long averageSellingPrice = calculateAverageSellingPrice(sales);
+
+        Long averagePrice = (averageBuyingPrice + averageSellingPrice) / 2;
+
+        overviewAverageBuyingPrice.setText(averageBuyingPrice + " Dilithium");
+        overviewAverageSellingPrice.setText(averageSellingPrice + " Dilithium");
+        overviewAveragePrice.setText(averagePrice + " Dilithium");
     }
 
     //
@@ -269,6 +287,8 @@ public class MainViewController extends Controller {
     /**
      * Calculates the current ZEN balance.
      *
+     * @param purchases A list of purchases.
+     * @param sales     A list of sales.
      * @return The current amount of ZEN.
      */
     private Long calculateCurrentZenBalance(List<Purchase> purchases, List<Sale> sales) {
@@ -288,6 +308,8 @@ public class MainViewController extends Controller {
     /**
      * Calculates the Dilithium balance.
      *
+     * @param purchases A list of purchases.
+     * @param sales     A list of sales.
      * @return The current amount of Dilithium.
      */
     private Long calculateCurrentDilithiumBalance(List<Purchase> purchases, List<Sale> sales) {
@@ -300,6 +322,42 @@ public class MainViewController extends Controller {
         for (Sale sale : sales) {
             result -= sale.getAmountDilithium();
         }
+
+        return result;
+    }
+
+    /**
+     * Calculates the average buying price from a list of purchases.
+     *
+     * @param purchases A list of purchases.
+     * @return The average buying price.
+     */
+    private Long calculateAverageBuyingPrice(List<Purchase> purchases) {
+        Long result = 0L;
+
+        for (Purchase purchase : purchases) {
+            result += purchase.getPrice();
+        }
+
+        result /= purchases.size();
+
+        return result;
+    }
+
+    /**
+     * Calculates the average selling price from a list of sales.
+     *
+     * @param sales A list of sales.
+     * @return The average selling price.
+     */
+    private Long calculateAverageSellingPrice(List<Sale> sales) {
+        Long result = 0L;
+
+        for (Sale sale : sales) {
+            result += sale.getPrice();
+        }
+
+        result /= sales.size();
 
         return result;
     }
