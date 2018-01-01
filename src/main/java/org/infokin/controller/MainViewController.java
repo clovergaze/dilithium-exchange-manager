@@ -166,8 +166,11 @@ public class MainViewController extends Controller {
 
     @FXML
     private void handleOverviewTabSelection() {
-        Long zenBalance = calculateCurrentZenBalance();
-        Long dilithiumBalance = calculateCurrentDilithiumBalance();
+        List<Purchase> purchases = purchaseService.getAllPurchases();
+        List<Sale> sales = saleService.getAllSales();
+
+        Long zenBalance = calculateCurrentZenBalance(purchases, sales);
+        Long dilithiumBalance = calculateCurrentDilithiumBalance(purchases, sales);
 
         overviewZENBalance.setText(zenBalance.toString() + " ZEN");
         overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
@@ -268,10 +271,7 @@ public class MainViewController extends Controller {
      *
      * @return The current amount of ZEN.
      */
-    private Long calculateCurrentZenBalance() {
-        List<Purchase> purchases = purchaseService.getAllPurchases();
-        List<Sale> sales = saleService.getAllSales();
-
+    private Long calculateCurrentZenBalance(List<Purchase> purchases, List<Sale> sales) {
         Long result = 0L;
 
         for (Purchase purchase : purchases) {
@@ -290,10 +290,7 @@ public class MainViewController extends Controller {
      *
      * @return The current amount of Dilithium.
      */
-    private Long calculateCurrentDilithiumBalance() {
-        List<Purchase> purchases = purchaseService.getAllPurchases();
-        List<Sale> sales = saleService.getAllSales();
-
+    private Long calculateCurrentDilithiumBalance(List<Purchase> purchases, List<Sale> sales) {
         Long result = 0L;
 
         for (Purchase purchase : purchases) {
