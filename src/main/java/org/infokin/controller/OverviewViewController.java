@@ -69,7 +69,7 @@ public class OverviewViewController extends Controller {
         overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
 
         // Calculate average prices
-        Long averageBuyingPrice = calculateAverageBuyingPrice(purchases);
+        Long averageBuyingPrice = purchaseService.calculateAverageBuyingPrice();
         Long averageSellingPrice = calculateAverageSellingPrice(sales);
 
         Long averagePrice = (averageBuyingPrice + averageSellingPrice) / 2;
@@ -116,27 +116,6 @@ public class OverviewViewController extends Controller {
 
         for (Sale sale : sales) {
             result -= sale.getAmountDilithium();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the average buying price from a list of purchases.
-     *
-     * @param purchases A list of purchases.
-     * @return The average buying price.
-     */
-    private Long calculateAverageBuyingPrice(List<Purchase> purchases) {
-        Long result = 0L;
-        int count = purchases.size();
-
-        if (count > 0) {
-            for (Purchase purchase : purchases) {
-                result += purchase.getPrice();
-            }
-
-            result /= count;
         }
 
         return result;

@@ -39,4 +39,26 @@ public class PurchaseService {
     public List<Purchase> getAllPurchases() {
         return purchaseRepository.getAll();
     }
+
+    /**
+     * Calculates the average buying price.
+     *
+     * @return The average buying price.
+     */
+    public Long calculateAverageBuyingPrice() {
+        Long result = 0L;
+
+        List<Purchase> purchases = getAllPurchases();
+        int count = purchases.size();
+
+        if (count > 0) {
+            for (Purchase purchase : purchases) {
+                result += purchase.getPrice();
+            }
+
+            result /= count;
+        }
+
+        return result;
+    }
 }
