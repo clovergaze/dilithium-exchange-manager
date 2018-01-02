@@ -139,21 +139,6 @@ public class PurchasesViewController extends Controller {
     }
 
     /**
-     * Resets the input interface.
-     */
-    private void resetInterface() {
-        updateDateTimePicker();
-
-        purchasePrice.setText("");
-        purchaseAmountZen.setText("");
-        purchaseAmountDilithium.setText("");
-
-        addPurchaseButton.setDisable(true);
-
-        Platform.runLater(() -> purchasePrice.requestFocus());
-    }
-
-    /**
      * Uses current time for element display.
      */
     private void updateDateTimePicker() {
@@ -180,6 +165,21 @@ public class PurchasesViewController extends Controller {
             purchaseAmountDilithium.setText("");
             addPurchaseButton.setDisable(true);
         }
+    }
+
+    /**
+     * Resets the input interface.
+     */
+    private void resetInterface() {
+        updateDateTimePicker();
+
+        purchasePrice.setText("");
+        purchaseAmountZen.setText("");
+        purchaseAmountDilithium.setText("");
+
+        addPurchaseButton.setDisable(true);
+
+        Platform.runLater(() -> purchasePrice.requestFocus());
     }
 
     /*---------------------

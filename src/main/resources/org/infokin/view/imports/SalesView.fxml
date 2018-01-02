@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import tornadofx.control.DateTimePicker?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:id="rootNode"
+            fx:controller="org.infokin.controller.SalesViewController"
+            prefHeight="600" prefWidth="800.0">
+    <BorderPane prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0">
+        <center>
+            <TableView fx:id="saleTable" prefHeight="200.0" BorderPane.alignment="CENTER">
+                <columns>
+                    <TableColumn fx:id="saleDateColumn" prefWidth="260.0" text="Date"/>
+                    <TableColumn fx:id="salePriceColumn" prefWidth="100.0" text="Price"/>
+                    <TableColumn prefWidth="287.0" text="Amount">
+                        <columns>
+                            <TableColumn fx:id="saleAmountZenColumn" prefWidth="120.0" text="ZEN"/>
+                            <TableColumn fx:id="saleAmountDilithiumColumn" prefWidth="160.0" text="Dilithium"/>
+                        </columns>
+                    </TableColumn>
+                </columns>
+                <BorderPane.margin>
+                    <Insets bottom="16.0"/>
+                </BorderPane.margin>
+            </TableView>
+        </center>
+        <bottom>
+            <VBox maxWidth="320.0" minWidth="320.0" spacing="16.0" BorderPane.alignment="CENTER">
+                <VBox spacing="8.0">
+                    <Label text="Date"/>
+                    <DateTimePicker fx:id="saleDateTimePicker" prefWidth="320.0"/>
+                </VBox>
+                <VBox spacing="8.0">
+                    <Label text="Price"/>
+                    <TextField fx:id="salePrice" onKeyReleased="#handleInputChanged"/>
+                </VBox>
+                <VBox spacing="8.0">
+                    <Label text="Amount (ZEN)"/>
+                    <TextField fx:id="saleAmountZen" onKeyReleased="#handleInputChanged"/>
+                </VBox>
+                <VBox spacing="8.0">
+                    <Label text="Amount (Dilithium)"/>
+                    <TextField fx:id="saleAmountDilithium"/>
+                </VBox>
+                <HBox spacing="8.0">
+                    <Button mnemonicParsing="false" onAction="#handleResetButtonClick" prefWidth="160.0"
+                            text="Reset"/>
+                    <Button fx:id="addSaleButton" disable="true" mnemonicParsing="false"
+                            onAction="#handleAddSaleButtonClick" prefWidth="160.0" text="Add Sale"/>
+                    <VBox.margin>
+                        <Insets top="8.0"/>
+                    </VBox.margin>
+                </HBox>
+                <BorderPane.margin>
+                    <Insets/>
+                </BorderPane.margin>
+            </VBox>
+        </bottom>
+        <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+        </padding>
+    </BorderPane>
+</AnchorPane>
