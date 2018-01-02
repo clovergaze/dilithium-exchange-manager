@@ -56,7 +56,7 @@ public class OverviewViewController extends Controller {
     /**
      * Updates the view using current information.
      */
-    public void updateView() {
+    public void updateInterface() {
         // Get list of all purchases and sales
         List<Purchase> purchases = purchaseService.getAllPurchases();
         List<Sale> sales = saleService.getAllSales();
