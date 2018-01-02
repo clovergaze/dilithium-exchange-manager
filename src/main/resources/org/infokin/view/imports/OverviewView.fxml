@@ -3,29 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:id="rootNode"
-            fx:controller="org.infokin.controller.OverviewViewController"
-            prefHeight="600" prefWidth="800.0">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootNode" prefHeight="600" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="org.infokin.controller.OverviewViewController">
     <!-- Balance -->
-    <Label layoutX="14.0" layoutY="14.0" text="Balance" underline="true">
+    <Label layoutX="14.0" layoutY="21.0" text="Balance:">
         <font>
             <Font name="System Bold" size="13.0"/>
         </font>
     </Label>
-    <Label fx:id="overviewZENBalance" layoutX="28.0" layoutY="36.0" text="0 ZEN"/>
-    <Label fx:id="overviewDilithiumBalance" layoutX="28.0" layoutY="54.0" text="0 Dilithium"/>
+    <Label fx:id="zenBalanceLabel" layoutX="86.0" layoutY="21.0" text="0 ZEN"/>
     <!-- Average prices -->
-    <Label layoutX="14.0" layoutY="80.0" text="Average prices" underline="true">
+    <Label layoutX="14.0" layoutY="48.0" text="Average prices" underline="true">
         <font>
             <Font name="System Bold" size="13.0"/>
         </font>
     </Label>
-    <Label layoutX="28.0" layoutY="102.0" text="Purchases:"/>
-    <Label fx:id="overviewAverageBuyingPrice" layoutX="106.0" layoutY="102.0" text="0 Dilithium"/>
-    <Label layoutX="28.0" layoutY="120.0" text="Sales:"/>
-    <Label fx:id="overviewAverageSellingPrice" layoutX="106.0" layoutY="120.0" text="0 Dilithium"/>
-    <Label layoutX="28.0" layoutY="146.0" text="Average:"/>
-    <Label fx:id="overviewAveragePrice" layoutX="106.0" layoutY="146.0" text="0 Dilithium"/>
+    <Label layoutX="28.0" layoutY="70.0" text="Purchases:"/>
+    <Label fx:id="averageBuyingPriceLabel" layoutX="106.0" layoutY="70.0" text="0 Dilithium"/>
+    <Label layoutX="28.0" layoutY="88.0" text="Sales:"/>
+    <Label fx:id="averageSellingPriceLabel" layoutX="106.0" layoutY="88.0" text="0 Dilithium"/>
+    <Label layoutX="28.0" layoutY="114.0" text="Average:"/>
+    <Label fx:id="averagePriceLabel" layoutX="106.0" layoutY="114.0" text="0 Dilithium"/>
 </AnchorPane>

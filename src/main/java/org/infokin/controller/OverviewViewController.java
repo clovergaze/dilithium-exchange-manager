@@ -28,19 +28,16 @@ public class OverviewViewController extends Controller {
     private AnchorPane rootNode;
 
     @FXML
-    private Label overviewZENBalance;
+    private Label zenBalanceLabel;
 
     @FXML
-    private Label overviewDilithiumBalance;
+    private Label averageBuyingPriceLabel;
 
     @FXML
-    private Label overviewAverageBuyingPrice;
+    private Label averageSellingPriceLabel;
 
     @FXML
-    private Label overviewAverageSellingPrice;
-
-    @FXML
-    private Label overviewAveragePrice;
+    private Label averagePriceLabel;
 
     /*----------
     | Services |
@@ -63,10 +60,8 @@ public class OverviewViewController extends Controller {
 
         // Calculate balances
         Long zenBalance = calculateCurrentZenBalance(purchases, sales);
-        Long dilithiumBalance = calculateCurrentDilithiumBalance(purchases, sales);
 
-        overviewZENBalance.setText(zenBalance.toString() + " ZEN");
-        overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
+        zenBalanceLabel.setText(zenBalance.toString() + " ZEN");
 
         // Calculate average prices
         Long averageBuyingPrice = purchaseService.calculateAverageBuyingPrice();
@@ -74,9 +69,9 @@ public class OverviewViewController extends Controller {
 
         Long averagePrice = (averageBuyingPrice + averageSellingPrice) / 2;
 
-        overviewAverageBuyingPrice.setText(averageBuyingPrice + " Dilithium");
-        overviewAverageSellingPrice.setText(averageSellingPrice + " Dilithium");
-        overviewAveragePrice.setText(averagePrice + " Dilithium");
+        averageBuyingPriceLabel.setText(averageBuyingPrice + " Dilithium");
+        averageSellingPriceLabel.setText(averageSellingPrice + " Dilithium");
+        averagePriceLabel.setText(averagePrice + " Dilithium");
     }
 
     /**
@@ -95,27 +90,6 @@ public class OverviewViewController extends Controller {
 
         for (Sale sale : sales) {
             result -= sale.getAmountZen();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the Dilithium balance.
-     *
-     * @param purchases A list of purchases.
-     * @param sales     A list of sales.
-     * @return The current amount of Dilithium.
-     */
-    private Long calculateCurrentDilithiumBalance(List<Purchase> purchases, List<Sale> sales) {
-        Long result = 0L;
-
-        for (Purchase purchase : purchases) {
-            result += purchase.getAmountDilithium();
-        }
-
-        for (Sale sale : sales) {
-            result -= sale.getAmountDilithium();
         }
 
         return result;
