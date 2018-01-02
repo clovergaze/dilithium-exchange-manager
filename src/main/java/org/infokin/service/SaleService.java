@@ -39,4 +39,26 @@ public class SaleService {
     public List<Sale> getAllSales() {
         return saleRepository.getAll();
     }
+
+    /**
+     * Calculates the average selling price.
+     *
+     * @return The average selling price.
+     */
+    public Long calculateAverageSellingPrice() {
+        Long result = 0L;
+
+        List<Sale> sales = getAllSales();
+        int count = sales.size();
+
+        if (count > 0) {
+            for (Sale sale : sales) {
+                result += sale.getPrice();
+            }
+
+            result /= count;
+        }
+
+        return result;
+    }
 }

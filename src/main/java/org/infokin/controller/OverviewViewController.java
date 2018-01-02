@@ -70,7 +70,7 @@ public class OverviewViewController extends Controller {
 
         // Calculate average prices
         Long averageBuyingPrice = purchaseService.calculateAverageBuyingPrice();
-        Long averageSellingPrice = calculateAverageSellingPrice(sales);
+        Long averageSellingPrice = saleService.calculateAverageSellingPrice();
 
         Long averagePrice = (averageBuyingPrice + averageSellingPrice) / 2;
 
@@ -116,27 +116,6 @@ public class OverviewViewController extends Controller {
 
         for (Sale sale : sales) {
             result -= sale.getAmountDilithium();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the average selling price from a list of sales.
-     *
-     * @param sales A list of sales.
-     * @return The average selling price.
-     */
-    private Long calculateAverageSellingPrice(List<Sale> sales) {
-        Long result = 0L;
-        int count = sales.size();
-
-        if (count > 0) {
-            for (Sale sale : sales) {
-                result += sale.getPrice();
-            }
-
-            result /= count;
         }
 
         return result;
