@@ -4,7 +4,10 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import org.infokin.controller.api.Controller;
@@ -17,7 +20,6 @@ import tornadofx.control.DateTimePicker;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Controller for main view.
@@ -34,24 +36,8 @@ public class MainViewController extends Controller {
     @FXML
     private BorderPane rootNode;
 
-    //
-    // Overview tab
-    //
-
     @FXML
-    private Label overviewZENBalance;
-
-    @FXML
-    private Label overviewDilithiumBalance;
-
-    @FXML
-    private Label overviewAverageBuyingPrice;
-
-    @FXML
-    private Label overviewAverageSellingPrice;
-
-    @FXML
-    private Label overviewAveragePrice;
+    private OverviewViewController overviewViewController;
 
     //
     // Purchase tab
@@ -175,23 +161,7 @@ public class MainViewController extends Controller {
 
     @FXML
     private void handleOverviewTabSelection() {
-        List<Purchase> purchases = purchaseService.getAllPurchases();
-        List<Sale> sales = saleService.getAllSales();
-
-        Long zenBalance = calculateCurrentZenBalance(purchases, sales);
-        Long dilithiumBalance = calculateCurrentDilithiumBalance(purchases, sales);
-
-        overviewZENBalance.setText(zenBalance.toString() + " ZEN");
-        overviewDilithiumBalance.setText(dilithiumBalance.toString() + " Dilithium");
-
-        Long averageBuyingPrice = calculateAverageBuyingPrice(purchases);
-        Long averageSellingPrice = calculateAverageSellingPrice(sales);
-
-        Long averagePrice = (averageBuyingPrice + averageSellingPrice) / 2;
-
-        overviewAverageBuyingPrice.setText(averageBuyingPrice + " Dilithium");
-        overviewAverageSellingPrice.setText(averageSellingPrice + " Dilithium");
-        overviewAveragePrice.setText(averagePrice + " Dilithium");
+        overviewViewController.updateView();
     }
 
     //
@@ -284,89 +254,6 @@ public class MainViewController extends Controller {
     | Methods |
     ---------*/
 
-    /**
-     * Calculates the current ZEN balance.
-     *
-     * @param purchases A list of purchases.
-     * @param sales     A list of sales.
-     * @return The current amount of ZEN.
-     */
-    private Long calculateCurrentZenBalance(List<Purchase> purchases, List<Sale> sales) {
-        Long result = 0L;
-
-        for (Purchase purchase : purchases) {
-            result += purchase.getAmountZen();
-        }
-
-        for (Sale sale : sales) {
-            result -= sale.getAmountZen();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the Dilithium balance.
-     *
-     * @param purchases A list of purchases.
-     * @param sales     A list of sales.
-     * @return The current amount of Dilithium.
-     */
-    private Long calculateCurrentDilithiumBalance(List<Purchase> purchases, List<Sale> sales) {
-        Long result = 0L;
-
-        for (Purchase purchase : purchases) {
-            result += purchase.getAmountDilithium();
-        }
-
-        for (Sale sale : sales) {
-            result -= sale.getAmountDilithium();
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the average buying price from a list of purchases.
-     *
-     * @param purchases A list of purchases.
-     * @return The average buying price.
-     */
-    private Long calculateAverageBuyingPrice(List<Purchase> purchases) {
-        Long result = 0L;
-        int count = purchases.size();
-
-        if (count > 0) {
-            for (Purchase purchase : purchases) {
-                result += purchase.getPrice();
-            }
-
-            result /= count;
-        }
-
-        return result;
-    }
-
-    /**
-     * Calculates the average selling price from a list of sales.
-     *
-     * @param sales A list of sales.
-     * @return The average selling price.
-     */
-    private Long calculateAverageSellingPrice(List<Sale> sales) {
-        Long result = 0L;
-        int count = sales.size();
-
-        if (count > 0) {
-            for (Sale sale : sales) {
-                result += sale.getPrice();
-            }
-
-            result /= count;
-        }
-
-        return result;
-    }
 
     /**
      * Sets current date and time to specified {@link DateTimePicker}.

@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootNode" prefHeight="600" prefWidth="800.0"
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="org.infokin.controller.MainViewController">
@@ -20,26 +19,7 @@
     <center>
         <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <Tab onSelectionChanged="#handleOverviewTabSelection" text="Overview">
-                <AnchorPane>
-                    <Label layoutX="14.0" layoutY="14.0" text="Balance" underline="true">
-                        <font>
-                            <Font name="System Bold" size="13.0"/>
-                        </font>
-                    </Label>
-                    <Label fx:id="overviewZENBalance" layoutX="28.0" layoutY="36.0" text="0 ZEN"/>
-                    <Label fx:id="overviewDilithiumBalance" layoutX="28.0" layoutY="54.0" text="0 Dilithium"/>
-                    <Label layoutX="14.0" layoutY="80.0" text="Average prices" underline="true">
-                        <font>
-                            <Font name="System Bold" size="13.0"/>
-                        </font>
-                    </Label>
-                    <Label fx:id="overviewAveragePrice" layoutX="106.0" layoutY="146.0" text="0 Dilithium"/>
-                    <Label layoutX="28.0" layoutY="102.0" text="Purchases:"/>
-                    <Label layoutX="28.0" layoutY="120.0" text="Sales:"/>
-                    <Label layoutX="28.0" layoutY="146.0" text="Average:"/>
-                    <Label fx:id="overviewAverageBuyingPrice" layoutX="106.0" layoutY="102.0" text="0 Dilithium"/>
-                    <Label fx:id="overviewAverageSellingPrice" layoutX="106.0" layoutY="120.0" text="0 Dilithium"/>
-                </AnchorPane>
+                <fx:include fx:id="overviewView" source="imports/OverviewView.fxml"/>
             </Tab>
             <Tab onSelectionChanged="#handlePurchaseTabSelection" text="Purchases">
                 <AnchorPane>
