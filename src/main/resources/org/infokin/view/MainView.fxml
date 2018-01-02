@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import tornadofx.control.DateTimePicker?>
@@ -22,65 +22,7 @@
                 <fx:include fx:id="overviewView" source="imports/OverviewView.fxml"/>
             </Tab>
             <Tab onSelectionChanged="#handlePurchaseTabSelection" text="Purchases">
-                <AnchorPane>
-                    <BorderPane prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <bottom>
-                            <VBox maxWidth="320.0" minWidth="320.0" spacing="16.0" BorderPane.alignment="CENTER">
-                                <VBox spacing="8.0">
-                                    <Label text="Date"/>
-                                    <DateTimePicker fx:id="purchaseDateTimePicker" prefWidth="320.0"/>
-                                </VBox>
-                                <VBox spacing="8.0">
-                                    <Label text="Price"/>
-                                    <TextField fx:id="purchasePrice" onKeyReleased="#handlePurchasePriceChanged"/>
-                                </VBox>
-                                <VBox spacing="8.0">
-                                    <Label text="Amount (ZEN)"/>
-                                    <TextField fx:id="purchaseAmountZen" onKeyReleased="#handlePurchaseAmountChanged"/>
-                                </VBox>
-                                <VBox spacing="8.0">
-                                    <Label text="Amount (Dilithium)"/>
-                                    <TextField fx:id="purchaseAmountDilithium" editable="false"/>
-                                </VBox>
-                                <HBox spacing="8.0">
-                                    <Button mnemonicParsing="false" onAction="#handleResetPurchaseButtonClick"
-                                            prefWidth="160.0" text="Reset"/>
-                                    <Button fx:id="addPurchaseButton" disable="true" mnemonicParsing="false"
-                                            onAction="#handleAddPurchaseButtonClick" prefWidth="160.0"
-                                            text="Add Purchase"/>
-                                    <VBox.margin>
-                                        <Insets top="8.0"/>
-                                    </VBox.margin>
-                                </HBox>
-                                <BorderPane.margin>
-                                    <Insets/>
-                                </BorderPane.margin>
-                            </VBox>
-                        </bottom>
-                        <padding>
-                            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
-                        </padding>
-                        <center>
-                            <TableView fx:id="purchaseTable" prefHeight="200.0" BorderPane.alignment="CENTER">
-                                <columns>
-                                    <TableColumn fx:id="purchaseDateColumn" prefWidth="260.0" text="Date"/>
-                                    <TableColumn fx:id="purchasePriceColumn" prefWidth="100.0" text="Price"/>
-                                    <TableColumn prefWidth="287.0" text="Amount">
-                                        <columns>
-                                            <TableColumn fx:id="purchaseAmountZenColumn" prefWidth="120.0" text="ZEN"/>
-                                            <TableColumn fx:id="purchaseAmountDilithiumColumn" prefWidth="160.0"
-                                                         text="Dilithium"/>
-                                        </columns>
-                                    </TableColumn>
-                                </columns>
-                                <BorderPane.margin>
-                                    <Insets bottom="16.0"/>
-                                </BorderPane.margin>
-                            </TableView>
-                        </center>
-                    </BorderPane>
-                </AnchorPane>
+                <fx:include fx:id="purchasesView" source="imports/PurchasesView.fxml"/>
             </Tab>
             <Tab onSelectionChanged="#handleSaleTabSelection" text="Sales">
                 <AnchorPane>

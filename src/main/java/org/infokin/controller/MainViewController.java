@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import org.infokin.controller.api.Controller;
-import org.infokin.model.Purchase;
 import org.infokin.model.Sale;
 import org.infokin.service.PurchaseService;
 import org.infokin.service.SaleService;
@@ -39,39 +38,8 @@ public class MainViewController extends Controller {
     @FXML
     private OverviewViewController overviewViewController;
 
-    //
-    // Purchase tab
-    //
-
     @FXML
-    private TableView<Purchase> purchaseTable;
-
-    @FXML
-    private TableColumn<Purchase, Date> purchaseDateColumn;
-
-    @FXML
-    private TableColumn<Purchase, Integer> purchasePriceColumn;
-
-    @FXML
-    private TableColumn<Purchase, Long> purchaseAmountZenColumn;
-
-    @FXML
-    private TableColumn<Purchase, Long> purchaseAmountDilithiumColumn;
-
-    @FXML
-    private DateTimePicker purchaseDateTimePicker;
-
-    @FXML
-    private TextField purchasePrice;
-
-    @FXML
-    private TextField purchaseAmountZen;
-
-    @FXML
-    private TextField purchaseAmountDilithium;
-
-    @FXML
-    private Button addPurchaseButton;
+    private PurchasesViewController purchasesViewController;
 
     //
     // Sale tab
@@ -130,11 +98,6 @@ public class MainViewController extends Controller {
      */
     @FXML
     private void initialize() {
-        purchaseDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        purchasePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        purchaseAmountZenColumn.setCellValueFactory(new PropertyValueFactory<>("amountZen"));
-        purchaseAmountDilithiumColumn.setCellValueFactory(new PropertyValueFactory<>("amountDilithium"));
-
         saleDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         salePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         saleAmountZenColumn.setCellValueFactory(new PropertyValueFactory<>("amountZen"));
@@ -145,66 +108,20 @@ public class MainViewController extends Controller {
     | User interface handlers |
     -------------------------*/
 
-    //
-    // Main
-    //
-
     @FXML
     private void handleCloseApplication() {
         Platform.exit();
         System.exit(0);
     }
 
-    //
-    // Overview tab
-    //
-
     @FXML
     private void handleOverviewTabSelection() {
-        overviewViewController.updateView();
+        overviewViewController.updateInterface();
     }
-
-    //
-    // Purchase tab
-    //
 
     @FXML
     private void handlePurchaseTabSelection() {
-        resetPurchaseInterface();
-        updatePurchasesTable();
-    }
-
-    @FXML
-    private void handlePurchasePriceChanged() {
-        updatePurchaseInterface();
-    }
-
-    @FXML
-    private void handlePurchaseAmountChanged() {
-        updatePurchaseInterface();
-    }
-
-    @FXML
-    private void handleResetPurchaseButtonClick() {
-        resetPurchaseInterface();
-    }
-
-    @FXML
-    private void handleAddPurchaseButtonClick() {
-        Purchase purchase = new Purchase();
-
-        Date date = Date.from(purchaseDateTimePicker.getDateTimeValue().atZone(ZoneId.systemDefault()).toInstant());
-
-        purchase.setDate(date);
-        purchase.setPrice(Integer.parseUnsignedInt(purchasePrice.getText()));
-        purchase.setAmountZen(Long.parseUnsignedLong(purchaseAmountZen.getText()));
-        purchase.setAmountDilithium(Long.parseUnsignedLong(purchaseAmountDilithium.getText()));
-
-        purchaseService.save(purchase);
-
-        updatePurchasesTable();
-
-        resetPurchaseInterface();
+        purchasesViewController.updateInterface();
     }
 
     //
@@ -254,7 +171,6 @@ public class MainViewController extends Controller {
     | Methods |
     ---------*/
 
-
     /**
      * Sets current date and time to specified {@link DateTimePicker}.
      *
@@ -289,36 +205,6 @@ public class MainViewController extends Controller {
             dilithiumField.setText("");
             addButton.setDisable(true);
         }
-    }
-
-    //
-    // Purchase tab
-    //
-
-    private void updatePurchasesTable() {
-        ObservableList<Purchase> purchases = FXCollections.observableArrayList(purchaseService.getAllPurchases());
-
-        purchaseTable.setItems(purchases);
-    }
-
-    private void updatePurchaseDateTimePicker() {
-        setCurrentDateTime(purchaseDateTimePicker);
-    }
-
-    private void updatePurchaseInterface() {
-        updateInterface(purchasePrice, purchaseAmountZen, purchaseAmountDilithium, addPurchaseButton);
-    }
-
-    private void resetPurchaseInterface() {
-        updatePurchaseDateTimePicker();
-
-        purchasePrice.setText("");
-        purchaseAmountZen.setText("");
-        purchaseAmountDilithium.setText("");
-
-        addPurchaseButton.setDisable(true);
-
-        Platform.runLater(() -> purchasePrice.requestFocus());
     }
 
     //
