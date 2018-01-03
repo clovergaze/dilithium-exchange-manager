@@ -5,12 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.infokin.controller.api.Controller;
-import org.infokin.model.Purchase;
-import org.infokin.model.Sale;
+import org.infokin.service.BalanceService;
 import org.infokin.service.PurchaseService;
 import org.infokin.service.SaleService;
-
-import java.util.List;
 
 /**
  * Controller for the overview view.
@@ -45,6 +42,7 @@ public class OverviewViewController extends Controller {
 
     private PurchaseService purchaseService = new PurchaseService();
     private SaleService saleService = new SaleService();
+    private BalanceService balanceService = new BalanceService();
 
     /*---------
     | Methods |
@@ -54,12 +52,8 @@ public class OverviewViewController extends Controller {
      * Updates the view using current information.
      */
     public void updateInterface() {
-        // Get list of all purchases and sales
-        List<Purchase> purchases = purchaseService.getAllPurchases();
-        List<Sale> sales = saleService.getAllSales();
-
         // Calculate balances
-        Long zenBalance = calculateCurrentZenBalance(purchases, sales);
+        Long zenBalance = balanceService.calculateCurrentZenBalance();
 
         zenBalanceLabel.setText(zenBalance.toString() + " ZEN");
 
@@ -72,27 +66,6 @@ public class OverviewViewController extends Controller {
         averageBuyingPriceLabel.setText(averageBuyingPrice + " Dilithium");
         averageSellingPriceLabel.setText(averageSellingPrice + " Dilithium");
         averagePriceLabel.setText(averagePrice + " Dilithium");
-    }
-
-    /**
-     * Calculates the current ZEN balance.
-     *
-     * @param purchases A list of purchases.
-     * @param sales     A list of sales.
-     * @return The current amount of ZEN.
-     */
-    private Long calculateCurrentZenBalance(List<Purchase> purchases, List<Sale> sales) {
-        Long result = 0L;
-
-        for (Purchase purchase : purchases) {
-            result += purchase.getAmountZen();
-        }
-
-        for (Sale sale : sales) {
-            result -= sale.getAmountZen();
-        }
-
-        return result;
     }
 
     /*---------------------
