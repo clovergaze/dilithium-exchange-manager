@@ -95,7 +95,7 @@ public class SalesViewController extends Controller {
 
     @FXML
     private void handleResetButtonClick() {
-        resetInterface();
+        resetInput();
     }
 
     @FXML
@@ -123,7 +123,7 @@ public class SalesViewController extends Controller {
      */
     public void updateInterface() {
         updateTable();
-        resetInterface();
+        resetInput();
     }
 
     /**
@@ -167,7 +167,7 @@ public class SalesViewController extends Controller {
     /**
      * Resets the input interface.
      */
-    private void resetInterface() {
+    private void resetInput() {
         updateDateTimePicker();
 
         salePrice.setText("");

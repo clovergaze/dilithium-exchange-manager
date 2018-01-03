@@ -98,7 +98,7 @@ public class PurchasesViewController extends Controller {
 
     @FXML
     private void handleResetButtonClick() {
-        resetInterface();
+        resetInput();
     }
 
     @FXML
@@ -126,7 +126,7 @@ public class PurchasesViewController extends Controller {
      */
     public void updateInterface() {
         updateTable();
-        resetInterface();
+        resetInput();
     }
 
     /**
@@ -170,7 +170,7 @@ public class PurchasesViewController extends Controller {
     /**
      * Resets the input interface.
      */
-    private void resetInterface() {
+    private void resetInput() {
         updateDateTimePicker();
 
         purchasePrice.setText("");
