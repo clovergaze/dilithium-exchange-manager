@@ -14,6 +14,28 @@ import java.net.URL;
 public class LayoutLoader {
 
     /**
+     * Nested class that serves as a data transport object for a
+     * view and controller pair.
+     */
+    public static class ViewControllerPair {
+        private final Object view;
+        private final Controller controller;
+
+        private ViewControllerPair(Object view, Controller controller) {
+            this.view = view;
+            this.controller = controller;
+        }
+
+        public Object getView() {
+            return view;
+        }
+
+        public Controller getController() {
+            return controller;
+        }
+    }
+
+    /**
      * Loads a layout resource and returns its view and controller.
      *
      * @param resourceName Name of the layout resource
@@ -49,27 +71,5 @@ public class LayoutLoader {
         Controller controller = loader.getController();
 
         return new ViewControllerPair(view, controller);
-    }
-
-    /**
-     * Nested class that serves as a data transport object for a
-     * view and controller pair.
-     */
-    public static class ViewControllerPair {
-        private final Object view;
-        private final Controller controller;
-
-        private ViewControllerPair(Object view, Controller controller) {
-            this.view = view;
-            this.controller = controller;
-        }
-
-        public Object getView() {
-            return view;
-        }
-
-        public Controller getController() {
-            return controller;
-        }
     }
 }
